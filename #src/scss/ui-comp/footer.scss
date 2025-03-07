@@ -1,0 +1,24 @@
+footer.footer{
+     background-color: var(--color-violet);
+     padding: 2.375rem 0 1.875rem 0;
+     margin-top: 6.25rem;
+     @media #{$ui-tablet} {
+          margin-top: 3rem;
+     }
+}
+
+.parnter-block{
+     background-color: #FAF9FA;
+     border-radius: 10px;
+     padding: 6px;
+
+}
+
+
+// @layer component{
+//      .collapse.flex-collapse {
+//           &.show{
+//                display: flex;
+//           }
+//      }
+// }

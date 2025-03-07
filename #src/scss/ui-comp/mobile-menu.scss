@@ -1,0 +1,118 @@
+.mobile-menu{
+     .bi:not(.bi-person){
+          color: var(--color-black);
+     }
+     .bi{
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+     }
+     .bi-list{
+          font-size: 1.75rem;
+     }
+     .bi-person{
+          font-size: 1.625rem;
+     }
+}
+
+.modal-mobile-menu.modal{
+     z-index: 1057;
+}
+
+.modal-mobile-search.modal{
+     z-index: 1057;
+}
+
+.mobile-menu-tabs:has(.menu-tabs-main-btn:not(.collapsed)){
+     .menu-tabs-main-btn.collapsed{
+          // animation: hide-tab .5s ease-out;
+          display: none;
+     }
+}
+
+.mobile-inner-menu-tab:has(.menu-tabs-inner-main-btn:not(.collapsed)){
+     .menu-tabs-inner-main-btn, .menu-tabs-sub-btn{
+          // animation: hide-tab .5s ease-out;
+          display: none;
+     }
+}
+
+@keyframes hide-tab {
+     // 0% {
+     //      display: block;
+     //      opacity: 1;
+     // }
+     // 50%{
+     //      opacity: 0;
+     // }
+     100% {
+          display: none;
+          opacity: 0;
+          height: 0;
+          visibility: hidden;
+     }
+}
+
+.menu-tabs-main-btn, .menu-tabs-sub-btn, .menu-tabs-inner-main-btn, .menu-tabs-inner-sub-btn{
+     text-transform: uppercase;
+     color: var(--color-white);
+     font-family: $ff-exo;
+     font-weight: 400;
+     line-height: 130%;
+     letter-spacing: 0;
+     width: 100%;
+     @include transition($transition-3);
+}
+
+.menu-tabs-main-btn, .menu-tabs-inner-main-btn{
+     display: flex;
+     flex-direction: row;
+     gap: .5rem;
+     justify-content: space-between;
+     align-items: center;
+     &-arrow{
+          &::after{
+               @extend .bootsrtap-icon;
+               content: '\F285';
+          }
+     }
+}
+
+.menu-tabs-sub-btn, .menu-tabs-inner-sub-btn{
+     display: flex;
+     flex-direction: row;
+     gap: .5rem;
+     align-items: center;
+     &::before{
+          @extend .bootsrtap-icon;
+          content: '\F284';
+     }
+}
+
+.menu-tabs-main-btn{
+     display: none;
+     &.collapsed{
+          display: flex;
+     }
+}
+
+
+.menu-tabs-sub-btn{
+     display: flex;
+     &.collapsed{
+          display: none;
+     }
+}
+
+.menu-tabs-collapse{
+     @include transition($transition-3);
+}
+
+
+.menu-tabs-link{
+     color: var(--color-white);
+     font-family: $ff-exo;
+     font-size: 1rem;
+     font-weight: 400;
+     line-height: 130%;
+     letter-spacing: 0;
+}
