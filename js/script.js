@@ -122,31 +122,35 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
-const agreeDeleteCheck = document.querySelector('#agreeDeleteCheck');
-const deleteAgreeBtn = document.querySelector('#deleteAgreeBtn');
+const pendingCheckContainer = document.querySelectorAll('.pending-check-block');
 
-function agreeCheckIsTrue(checkBox) {
-	if (checkBox.checked) {
-		return true;
-	} else {
-		return false;
-	}
-}
+pendingCheckContainer.forEach((container) => {
+     let checkbox = container.querySelector('.agree-delete-check');
+     let button = container.querySelector('.delete-agree-btn');
 
-if (agreeDeleteCheck) {
-	if (agreeCheckIsTrue(agreeDeleteCheck)) {
-		deleteAgreeBtn.disabled = false;
-	} else {
-		deleteAgreeBtn.disabled = true;
-	}
-	agreeDeleteCheck.addEventListener('change', () => {
-		if (agreeCheckIsTrue(agreeDeleteCheck)) {
-			deleteAgreeBtn.disabled = false;
-		} else {
-			deleteAgreeBtn.disabled = true;
-		}
-	});
-}
+     function agreeCheckIsTrue(checkBox) {
+          if (checkBox.checked) {
+               return true;
+          } else {
+               return false;
+          }
+     }
+
+     if (checkbox) {
+          if (agreeCheckIsTrue(checkbox)) {
+               button.disabled = false;
+          } else {
+               button.disabled = true;
+          }
+          checkbox.addEventListener('change', () => {
+               if (agreeCheckIsTrue(checkbox)) {
+                    button.disabled = false;
+               } else {
+                    button.disabled = true;
+               }
+          });
+     }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 	const radioGroupsSideNav = document.querySelectorAll('.side-nav-step .radio-group-step');
@@ -179,3 +183,66 @@ document.addEventListener('DOMContentLoaded', () => {
 	toggleGroupProcess(radioGroupsSideNav);
 	toggleGroupProcess(radioGroupsModal);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+     const radioButtons = document.querySelectorAll('input[name="tabRadio"]');
+
+     const tabPanes = document.querySelectorAll('.tab-pane');
+
+     radioButtons.forEach((radio) => {
+          radio.addEventListener('change', () => {
+               tabPanes.forEach((pane) =>
+                    pane.classList.remove('active', 'show')
+               );
+
+               const targetPane = document.querySelector(
+                    radio.getAttribute('data-bs-target')
+               );
+
+               if (targetPane) {
+                    targetPane.classList.add('active', 'show');
+               }
+          });
+     });
+});
+
+const phoneInputs = document.querySelectorAll('.phone');
+
+if (phoneInputs) {
+     phoneInputs.forEach((input) => {
+          let mask;
+          input.addEventListener('focus', function () {
+               if (!mask) {
+                    mask = IMask(input, {
+                         mask: '+{375}(00)000-00-00',
+                         lazy: false,
+                         blocks: {
+                              375: {
+                                   mask: '375',
+                                   immutable: true,
+                              },
+
+                              '00': {
+                                   mask: '00',
+                              },
+                              '000': {
+                                   mask: '000',
+                              },
+                              '00': {
+                                   mask: '00',
+                              },
+                         },
+                    });
+               }
+          });
+     });
+
+     phoneInputs.forEach((input) => {
+          input.addEventListener('blur', function () {
+               if (mask && !input.value) {
+                    mask.destroy();
+                    mask = null;
+               }
+          });
+     });
+}
